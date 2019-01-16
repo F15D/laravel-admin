@@ -1352,10 +1352,16 @@ class Form implements Renderable
      */
     public function resource($slice = -2)
     {
-        $segments = explode('/', trim(app('request')->getUri(), '/'));
+        $request = app('request');
+
+        $segments = explode('/', trim($request->getUri(), '/'));
 
         if ($slice != 0) {
             $segments = array_slice($segments, 0, $slice);
+        }
+
+        if ($request->header("x-forwarded-proto") === 'https') {
+            $segments[0] = $request->header("x-forwarded-proto");
         }
 
         return implode('/', $segments);

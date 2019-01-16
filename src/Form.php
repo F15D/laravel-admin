@@ -1361,7 +1361,7 @@ class Form implements Renderable
         }
 
         if ($request->header("x-forwarded-proto") === 'https') {
-            $segments[0] = $request->header("x-forwarded-proto");
+            $segments[0] = $request->header("x-forwarded-proto") . ':';
         }
 
         return implode('/', $segments);

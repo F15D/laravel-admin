@@ -25,7 +25,7 @@ class AuthController extends Controller
             return redirect($this->redirectPath());
         }
 
-        return view('admin::login');
+        return view('admin::login', ['username_field' => $this->username()]);
     }
 
     /**

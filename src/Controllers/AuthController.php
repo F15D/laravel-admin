@@ -190,7 +190,7 @@ class AuthController extends Controller
      */
     protected function username()
     {
-        return 'username';
+        return 'email';
     }
 
     /**

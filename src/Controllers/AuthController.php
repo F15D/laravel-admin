@@ -190,7 +190,7 @@ class AuthController extends Controller
      */
     protected function username()
     {
-        return 'email';
+        return config('admin.database.users_fields.username', 'email');
     }
 
     /**

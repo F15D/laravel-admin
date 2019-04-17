@@ -99,4 +99,7 @@ return [
         'filter_placeholder' => 'Filtrar',
     ],
     'menu_titles'           => [],
+    'filters' => [
+        'user_name_or_email' => 'Usuário (nome ou e-mail)',
+    ],
 ];

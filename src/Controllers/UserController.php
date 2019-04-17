@@ -100,6 +100,13 @@ class UserController extends Controller
             }
         });
 
+        $grid->filter(function($filter) {
+            $filter->where(function($query) {
+                $email = $this->input;
+                $query->where('email', 'like', "%{$email}%")->orWhere('name', 'like', "%{$email}%");
+            }, trans('admin.filters.user_name_or_email'));
+        });
+
         $grid->tools(function (Grid\Tools $tools) {
             $tools->batch(function (Grid\Tools\BatchActions $actions) {
                 $actions->disableDelete();

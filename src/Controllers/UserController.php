@@ -6,6 +6,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Controller;
 
 class UserController extends Controller
@@ -35,6 +36,9 @@ class UserController extends Controller
      */
     public function show($id, Content $content)
     {
+        if ($id instanceof Model) {
+            $id = $id->getKey();
+        }
         return $content
             ->header(trans('admin.administrator'))
             ->description(trans('admin.detail'))
@@ -50,6 +54,9 @@ class UserController extends Controller
      */
     public function edit($id, Content $content)
     {
+        if ($id instanceof Model) {
+            $id = $id->getKey();
+        }
         return $content
             ->header(trans('admin.administrator'))
             ->description(trans('admin.edit'))

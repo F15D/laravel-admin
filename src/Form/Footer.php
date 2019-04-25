@@ -7,6 +7,10 @@ use Illuminate\Contracts\Support\Renderable;
 
 class Footer implements Renderable
 {
+    const CHECKBOX_VIEW = 'view';
+    const CHECKBOX_EDIT = 'continue_editing';
+    const CHECKBOX_CREATE = 'continue_creating';
+
     /**
      * Footer view.
      *
@@ -34,6 +38,12 @@ class Footer implements Renderable
      * @var array
      */
     protected $checkboxes = ['view', 'continue_editing', 'continue_creating'];
+
+    /**
+     * The default option of the after-submit-checkboxes
+     * @var string|null
+     */
+    protected $defaultOption;
 
     /**
      * Footer constructor.
@@ -125,6 +135,16 @@ class Footer implements Renderable
         return $this;
     }
 
+    public function setDefaultOption($checkboxOption)
+    {
+        if (!in_array($checkboxOption, $this->checkboxes)) {
+            return $this;
+        }
+
+        $this->defaultOption = $checkboxOption;
+        return $this;
+    }
+
     /**
      * Setup scripts.
      */
@@ -152,6 +172,7 @@ EOT;
             'buttons'      => $this->buttons,
             'checkboxes'   => $this->checkboxes,
             'width'        => $this->builder->getWidth(),
+            'default_checkbox' => $this->defaultOption,
         ];
 
         return view($this->view, $data)->render();

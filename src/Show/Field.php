@@ -93,6 +93,14 @@ class Field implements Renderable
     ];
 
     /**
+     * @var array
+     */
+    protected $width = [
+        'field' => 8,
+        'label' => 2,
+    ];
+
+    /**
      * Field constructor.
      *
      * @param string $name
@@ -520,6 +528,8 @@ HTML;
             'escape'    => $this->escape,
             'label'     => $this->getLabel(),
             'wrapped'   => $this->border,
+            'labelWidth' => $this->width['label'],
+            'fieldWidth' => $this->width['field'],
         ];
     }
 
@@ -540,5 +550,20 @@ HTML;
         }
 
         return view($this->view, $this->variables());
+    }
+
+    /**
+     * Set the width of both field and label
+     *
+     * @param int $field
+     * @param int $label
+     * @return $this
+     */
+    public function setWidth($field = 8, $label = 2)
+    {
+        $this->width['field'] = $field;
+        $this->width['label'] = $label;
+
+        return $this;
     }
 }

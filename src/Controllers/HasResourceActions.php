@@ -2,6 +2,8 @@
 
 namespace Encore\Admin\Controllers;
 
+use Illuminate\Database\Eloquent\Model;
+
 trait HasResourceActions
 {
     /**
@@ -13,6 +15,9 @@ trait HasResourceActions
      */
     public function update($id)
     {
+        if ($id instanceof Model)
+            $id = $id->getKey();
+
         return $this->form()->update($id);
     }
 
@@ -35,6 +40,9 @@ trait HasResourceActions
      */
     public function destroy($id)
     {
+        if ($id instanceof Model)
+            $id = $id->getKey();
+
         if ($this->form()->destroy($id)) {
             $data = [
                 'status'  => true,
